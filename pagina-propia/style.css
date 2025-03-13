@@ -1,0 +1,211 @@
+
+/* El código de las animaciones de los ojos 
+le pertenece a Prashant Yadav en https://learnersbucket.com/tutorials/js-projects/eye-follow-cursor-in-javascript/ 
+*/
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    background: pink;
+  }
+  
+  /* Wrapper */
+  .eyes {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 3px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+  }
+  
+  /* Eye */
+  .eye-retina {
+    display: inline-block;
+    width: 30%;
+    height: 50%;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* lashes */
+  .eye-lash {
+    position: absolute;
+    height: 50%;
+    background: rgb(75, 70, 71);
+    width: 100%;
+    z-index: 1;
+  }
+
+
+  /* Indicaciones de movimiento */
+  .up {
+    top: -50%;
+    animation: blinkbottom 10s linear infinite;
+  }
+  
+  .down {
+    bottom: -50%;
+    animation: blinktop 10s linear infinite;
+  }
+  
+  /* Hacer que parpadee*/
+
+  @keyframes blinkbottom {
+    0% {
+      top: -50%;
+    }
+    5% {
+      top: 0;
+    }
+    10% {
+      top: -50%;
+    }
+  }
+  
+  @keyframes blinktop {
+    0% {
+      bottom: -50%;
+    }
+    5% {
+      bottom: 0;
+    }
+    10% {
+      bottom: -50%;
+    }
+  }
+
+
+/*El codigo original para crear el gato 
+le pertenece a Chung Chloe y esta publicado en:
+https://codepen.io/chungchloe/pen/gOwJGzz*/  
+
+/*Container*/
+.gigi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 5em;
+    margin-left: -10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /*Ears*/
+  .ears {
+    position: relative;
+    width: 0; height: 0;
+    z-index: -1;
+  }
+  .ears:before {
+    content: '';
+    position: relative;
+    display: block;
+    width: 0; height: 0;
+  }
+  #ear1 {
+    bottom: 6em; left: 8em;
+    border-bottom: 200px solid #111;
+    border-left: 150px solid transparent;
+    transform: rotate(-30deg);
+  }
+  #ear1:before {
+    right: 7.5em;
+    border-bottom: 200px solid #6b5677;
+    border-left: 100px solid transparent;
+    transform: rotate(9deg);
+  }
+  #ear2 {
+    bottom: 18em; left: 27em;
+    border-bottom: 200px solid #111;
+    border-right: 150px solid transparent;
+    transform: rotate(30deg);
+  }
+  #ear2:before {
+    left: 1.2em;
+    border-bottom: 200px solid #6b5677;
+    border-right: 100px solid transparent;
+    transform: rotate(-9deg);
+  }
+  
+  /*Face*/
+  .face {
+    position: relative;
+    width: 400px; height: 300px;
+    border-radius: 50%;
+    background: rgb(34, 34, 34);
+    background: linear-gradient(
+    to right, #222 15%, #4a4a4a
+    );
+  }
+  
+  /*Eyes*/
+  .eyes {
+    position: relative;
+    margin: 10px;
+    width: 110px; height: 120px;
+    background: #eee;
+    border-radius: 50%;
+  }
+  #eye1 {
+    top: 3.5em; left: 3em;
+    background: linear-gradient(
+    to right, #bbb, #eee 50%);
+  }
+  #eye2 {
+    bottom: 4.5em; left: 14em;
+    background: linear-gradient(
+    to left, #bbb, #eee 50%);
+  }
+  
+  #eye1:before { left: 3.2em; }
+  #eye2:before { left: 1.5em; }
+  
+  /*Nose*/
+  .nose {
+    position: relative;
+    bottom: 7em; left: 10.7em;
+    width: 0; height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 35px solid #D66F83;
+    border-radius: 30%;
+  }
+  
+  /*Ribbon*/
+  .ribbon { position: relative; }
+  .ribbon div { position: absolute; }
+  #ribbon-middle {
+    width: 60px; height: 60px;
+    border-radius: 30%;
+    top: 8em; left: -14.2em;
+    background: linear-gradient(to right, #d81f3e, #bf0035);
+    z-index: 2;
+  }
+  .ribbon-sides, .ribbon-sides:after {
+    border-radius: 15%;
+  }
+  #ribbon-left {
+    border-left: 150px solid #d81f3e;
+    border-bottom: 80px solid transparent;
+    left: -21em; top: 8em; 
+    transform: rotate(25deg);
+  }
+  #ribbon-right {
+    border-right: 150px solid #d81f3e;
+    border-bottom: 80px solid transparent;
+    left: -13em; top: 8em; 
+    transform: rotate(-25deg);
+    z-index: 1;
+  }
