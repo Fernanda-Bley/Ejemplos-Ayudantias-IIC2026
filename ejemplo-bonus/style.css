@@ -53,54 +53,6 @@ le pertenece a Prashant Yadav en https://learnersbucket.com/tutorials/js-project
   transform: translate(-50%, -50%);
 }
 
-/* lashes */
-.eye-lash {
-  position: absolute;
-  height: 50%;
-  background: rgb(75, 70, 71);
-  width: 100%;
-  z-index: 1;
-}
-
-
-/* Indicaciones de movimiento */
-.up {
-  top: -50%;
-  animation: blinkbottom 10s linear infinite;
-}
-
-.down {
-  bottom: -50%;
-  animation: blinktop 10s linear infinite;
-}
-
-/* Hacer que parpadee*/
-
-@keyframes blinkbottom {
-  0% {
-    top: -50%;
-  }
-  5% {
-    top: 0;
-  }
-  10% {
-    top: -50%;
-  }
-}
-
-@keyframes blinktop {
-  0% {
-    bottom: -50%;
-  }
-  5% {
-    bottom: 0;
-  }
-  10% {
-    bottom: -50%;
-  }
-}
-
-
 /*El codigo original para crear el gato 
 le pertenece a Chung Chloe y esta publicado en:
 https://codepen.io/chungchloe/pen/gOwJGzz*/  
