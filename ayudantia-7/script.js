@@ -102,34 +102,37 @@ function midiToNoteName(midi) {
 
 let personalizedVoice = null;
 
-// Cargar voces al inicio
+// Load voices and find the preferred one
 window.speechSynthesis.onvoiceschanged = () => {
-  const voices = window.speechSynthesis.getVoices();
+  const voices = speechSynthesis.getVoices();
   personalizedVoice = voices.find(voice => voice.name === 'Microsoft Alvaro Online (Natural) - Spanish (Spain)');
 };
 
-// Función para hablar con TTS
+// Speak function with fallback
 function speak(text) {
   const utterance = new SpeechSynthesisUtterance(text);
+
   if (personalizedVoice) {
     utterance.voice = personalizedVoice;
+  } else {
+    // Optional fallback: pick first Spanish voice
+    const fallback = speechSynthesis.getVoices().find(v => v.lang.startsWith("es"));
+    if (fallback) utterance.voice = fallback;
   }
-  speechSynthesis.cancel(); // Detener cualquier voz anterior
+
+  speechSynthesis.cancel(); // Stop any ongoing speech
   speechSynthesis.speak(utterance);
 }
 
+// Chart and canvas setup
 let chart;
 const canvas = document.getElementById("consoleChart");
 const ctx    = canvas.getContext("2d");
 
-
-
-// Function to update the chart
 function updateChart(data) {
   const selectedFirm = document.getElementById("companySelect").value;
   const filteredData = data.filter(item => item.Firm === selectedFirm);
-
-  const sortedData = filteredData.sort((a, b) => b["Units Sold (M)"] - a["Units Sold (M)"]);
+  const sortedData   = filteredData.sort((a, b) => b["Units Sold (M)"] - a["Units Sold (M)"]);
 
   const labels    = sortedData.map(item => item.Platform);
   const unitsSold = sortedData.map(item => parseFloat(item["Units Sold (M)"]));
@@ -145,37 +148,22 @@ function updateChart(data) {
     plugins: {
       zoom: {
         zoom: {
-          wheel: {
-            enabled: true
-          },
-          pinch: {
-            enabled: true
-          },
+          wheel: { enabled: true },
+          pinch: { enabled: true },
           mode: 'xy'
         },
         pan: {
           enabled: true,
           mode: 'xy'
-        },
-        onZoomComplete: ({ chart }) => {
-          const xScale = chart.scales.x;
-          const yScale = chart.scales.y;
-          const minX = xScale.min.toFixed(2);
-          const maxX = xScale.max.toFixed(2);
-          const minY = yScale.min.toFixed(2);
-          const maxY = yScale.max.toFixed(2);
-          speak(`Área visible: plataformas entre ${minX} y ${maxX}, con ventas entre ${minY} y ${maxY} millones de unidades.`);
-          console.log(`Área visible: plataformas entre ${minX} y ${maxX}, con ventas entre ${minY} y ${maxY} millones de unidades.`);
         }
       }
-    },
-    
+    }
   };
 
   const colorMap = {
-    Nintendo:   { bg: '#e60012', border: '#8a0011' },
-    Sony:       { bg: '#003791', border: '#0055ff' },
-    Microsoft:  { bg: '#107c11', border: '#7eb900' }
+    Nintendo:  { bg: '#e60012', border: '#8a0011' },
+    Sony:      { bg: '#003791', border: '#0055ff' },
+    Microsoft: { bg: '#107c11', border: '#7eb900' }
   };
 
   if (colorMap[selectedFirm]) {
@@ -193,6 +181,17 @@ function updateChart(data) {
         }]
       },
       options: baseOptions
+    });
+
+    // Adding hover event to trigger speech on hover
+    chart.canvas.addEventListener('mousemove', (event) => {
+      const activePoints = chart.getElementsAtEvent(event);
+      if (activePoints.length > 0) {
+        const index = activePoints[0].index;
+        const label = labels[index];
+        const sales = unitsSold[index];
+        speak(`Plataforma: ${label}, Ventas: ${sales} millones`);
+      }
     });
   } else {
     canvas.style.backgroundColor = "#FFFFFF";
@@ -215,12 +214,11 @@ function fetchCSVFile() {
     .catch(error => console.error("Error fetching CSV file:", error));
 }
 
-// Event listener for the select dropdown to update the chart
 document.getElementById("companySelect")
         .addEventListener("change", fetchCSVFile);
 
-// Initial fetch and chart render
 fetchCSVFile();
+
 
 // Creando el mapa de Japón
 
