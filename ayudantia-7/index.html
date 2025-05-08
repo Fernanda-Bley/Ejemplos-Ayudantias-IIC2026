@@ -15,18 +15,7 @@
 }
     </style>
     
-    <script src="https://unpkg.com/tone"></script>
-    <script type="module">
-        import * as Tone from 'https://unpkg.com/tone@next?module';
-        import instruments from 'https://cdn.jsdelivr.net/npm/tonejs-instruments@1.0.1/+esm';
-      
-        const piano = await instruments.instrument('acoustic_grand_piano').toDestination();
-        const flute = await instruments.instrument('flute').toDestination();
-      
-        // expose to global scope for script.js
-        window.piano = piano;
-        window.flute = flute;
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/tonejs-instruments@1.0.1/+esm"></script>
     
     <script src="https://d3js.org/d3.v7.min.js"></script>   
     <script src="https://cdn.jsdelivr.net/npm/papaparse/papaparse.min.js"></script>
@@ -36,6 +25,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+
+
     
     
 </head>
@@ -65,11 +56,11 @@
     </div>
     
     <label for="companySelect">Select Company:</label>
-    <select id="companySelect">
-        <option value="Sony">Sony</option>
-        <option value="Nintendo">Nintendo</option>
-        <option value="Microsoft">Microsoft</option>
-    </select>
+<select id="companySelect" class="box">
+    <option value="Sony">Sony</option>
+    <option value="Nintendo">Nintendo</option>
+    <option value="Microsoft">Microsoft</option>
+</select>
 
     <br><br>
     <br><br>
