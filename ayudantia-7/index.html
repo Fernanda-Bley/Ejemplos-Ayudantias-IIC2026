@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://img.icons8.com/forma-bold/24/hearing.png" type="image/png">
+    
+    <title>Ayudantia-6-Tone</title>
+    <link rel="stylesheet" href="style.css" />
+    
+    <style>
+      svg.map {
+  width: 5000px;
+  height: 600px;
+}
+    </style>
+    
+    <script src="https://unpkg.com/tone"></script>
+    <script type="module">
+        import * as Tone from 'https://unpkg.com/tone@next?module';
+        import instruments from 'https://cdn.jsdelivr.net/npm/tonejs-instruments@1.0.1/+esm';
+      
+        const piano = await instruments.instrument('acoustic_grand_piano').toDestination();
+        const flute = await instruments.instrument('flute').toDestination();
+      
+        // expose to global scope for script.js
+        window.piano = piano;
+        window.flute = flute;
+    </script>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/papaparse/papaparse.min.js"></script>
+    
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+    
+    
+</head>
+
+  
+  <body>
+    
+  <div class="header">
+    <div class="header-fixed">
+      <span>IIC2016</span>
+    </div>
+    <div class="header-notFixed">
+      <h1>Ayudantía Tone/Plotly</h1>
+      <p>Muchos sonidos, colores y gráficas</p>
+    </div>
+  </div> 
+
+  
+  <div class="content">
+    
+    
+    <h1 id="smaller-title">Disney vs. Ghibli</h1>
+
+    <div id="Movies"></div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <button id="button-64" role="button"><span class="text">Escucha la batalla</span></button>
+    </div>
+    
+    <label for="companySelect">Select Company:</label>
+    <select id="companySelect">
+        <option value="Sony">Sony</option>
+        <option value="Nintendo">Nintendo</option>
+        <option value="Microsoft">Microsoft</option>
+    </select>
+
+    <br><br>
+    <br><br>
+
+    <canvas id="consoleChart" width="400" height="200"></canvas>
+    
+    <h1 id="smaller-title">Volcanes de Japón y sus alturas</h1>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <svg class="map" width="800" height="400"></svg>
+    </div>
+    <div id="tooltip" style="
+  position: absolute;
+  visibility: hidden;
+  background: white;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+"></div>
+  
+  <audio id="player"></audio>
+  
+  </div>
+  
+</div>
+    <script src="script.js"></script>
+  </body>
+</html>
